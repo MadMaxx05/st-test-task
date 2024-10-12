@@ -3,6 +3,11 @@
 define( 'TEMPLATE_DIR', get_template_directory() );
 define( 'TEMPLATE_DIR_URI', get_template_directory_uri() );
 
+require_once TEMPLATE_DIR . '/inc/post-types/book.php';
+
+require_once TEMPLATE_DIR . '/inc/taxonomies/genre.php';
+require_once TEMPLATE_DIR . '/inc/taxonomies/author.php';
+
 function synapse_scripts() {
 	// Enqueue theme stylesheet
 	wp_enqueue_style( 'synapse-styles', TEMPLATE_DIR_URI . '/source/css/styles.css' );
