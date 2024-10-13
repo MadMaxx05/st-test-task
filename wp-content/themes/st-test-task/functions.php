@@ -4,17 +4,13 @@ define( 'TEMPLATE_DIR', get_template_directory() );
 define( 'TEMPLATE_DIR_URI', get_template_directory_uri() );
 
 require_once TEMPLATE_DIR . '/inc/post-types/book.php';
-
 require_once TEMPLATE_DIR . '/inc/taxonomies/genre.php';
 require_once TEMPLATE_DIR . '/inc/taxonomies/author.php';
-
 require_once TEMPLATE_DIR . '/inc/shortcodes.php';
-
 require_once TEMPLATE_DIR . '/inc/widgets/latest_books_by_author.php';
-
 require_once TEMPLATE_DIR . '/inc/utils.php';
 
-function synapse_scripts() {
+function synapse_scripts(): void {
 	// Enqueue theme stylesheet
 	wp_enqueue_style( 'synapse-styles', TEMPLATE_DIR_URI . '/source/css/styles.css' );
 
@@ -26,7 +22,7 @@ add_action( 'wp_enqueue_scripts', 'synapse_scripts' );
 
 add_filter( 'widget_text', 'do_shortcode' );
 
-function widgets_init() {
+function widgets_init(): void {
 	register_sidebar( array(
 		'name'          => __( 'Primary Sidebar', 'synapse' ),
 		'id'            => 'primary-sidebar',

@@ -14,73 +14,27 @@
         <div class="row">
             <!-- Blog entries-->
             <div class="col-lg-8">
-                <!-- Featured blog post-->
-                <div class="card mb-4">
-                    <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg"
-                                      alt="..."/></a>
-                    <div class="card-body">
-                        <div class="small text-muted">January 1, 2023</div>
-                        <h2 class="card-title">Featured Post Title</h2>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis
-                            aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi
-                            vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                        <a class="btn btn-primary" href="#!">Read more →</a>
-                    </div>
-                </div>
                 <!-- Nested row for non-featured blog posts-->
                 <div class="row">
-                    <div class="col-lg-6">
-                        <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top"
-                                              src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..."/></a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 1, 2023</div>
-                                <h2 class="card-title h4">Post Title</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Reiciendis aliquid atque, nulla.</p>
-                                <a class="btn btn-primary" href="#!">Read more →</a>
+					<?php if ( have_posts() ) : ?>
+						<?php while ( have_posts() ) : the_post(); ?>
+                            <div class="col-lg-6">
+                                <div class="card mb-4">
+                                    <a href="<?php the_permalink(); ?>">
+                                        <img class="card-img-top"
+                                             src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg"
+                                             alt="..."/>
+                                    </a>
+                                    <div class="card-body">
+                                        <div class="small text-muted"><?php the_date( 'M d, Y' ); ?></div>
+                                        <h2 class="card-title h4"><?php the_title(); ?></h2>
+                                        <div class="card-text"><?php the_excerpt(); ?></div>
+                                        <a class="btn btn-primary" href="<?php the_permalink(); ?>">Read more →</a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top"
-                                              src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..."/></a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 1, 2023</div>
-                                <h2 class="card-title h4">Post Title</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Reiciendis aliquid atque, nulla.</p>
-                                <a class="btn btn-primary" href="#!">Read more →</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top"
-                                              src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..."/></a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 1, 2023</div>
-                                <h2 class="card-title h4">Post Title</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Reiciendis aliquid atque, nulla.</p>
-                                <a class="btn btn-primary" href="#!">Read more →</a>
-                            </div>
-                        </div>
-                        <!-- Blog post-->
-                        <div class="card mb-4">
-                            <a href="#!"><img class="card-img-top"
-                                              src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..."/></a>
-                            <div class="card-body">
-                                <div class="small text-muted">January 1, 2023</div>
-                                <h2 class="card-title h4">Post Title</h2>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                    Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
-                                <a class="btn btn-primary" href="#!">Read more →</a>
-                            </div>
-                        </div>
-                    </div>
+						<?php endwhile; ?>
+					<?php endif; ?>
                 </div>
                 <!-- Pagination-->
                 <nav aria-label="Pagination">
@@ -103,13 +57,5 @@
             </div>
         </div>
     </div>
-
-<?php if ( have_posts() ) :
-	while ( have_posts() ) :
-
-		the_post();
-
-	endwhile;
-endif; ?>
 
 <?php get_footer(); ?>
