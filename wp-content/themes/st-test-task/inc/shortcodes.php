@@ -3,7 +3,7 @@
 /**
  * Register the shortcode `[books genre="name"]`
  */
-function display_books_by_genre_shortcode( $attrs ) {
+function display_books_by_genre_shortcode( $attrs ): string {
 	$attrs = shortcode_atts(
 		[
 			'genre' => '',
@@ -73,3 +73,10 @@ function display_books_by_genre_shortcode( $attrs ) {
 }
 
 add_shortcode( 'books', 'display_books_by_genre_shortcode' );
+
+
+function synapse_year_shortcode(): string {
+	return date( 'Y' );
+}
+
+add_shortcode( 'year', 'synapse_year_shortcode' );

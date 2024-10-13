@@ -1,3 +1,11 @@
+<?php
+
+$locations  = get_nav_menu_locations();
+$menu_id    = array_key_exists( 'primary', $locations ) ? $locations['primary'] : [];
+$menu_items = wp_get_nav_menu_items( $menu_id ) ?: [];
+
+?>
+
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -16,10 +24,10 @@
                     class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#!">Contact</a></li>
-                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li>
+				<?php foreach ( $menu_items as $item ) : ?>
+                    <li class="nav-item"><a class="nav-link"
+                                            href="<?php echo $item->url; ?>"><?php echo $item->title; ?></a></li>
+				<?php endforeach; ?>
             </ul>
         </div>
     </div>

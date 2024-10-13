@@ -9,6 +9,22 @@ require_once TEMPLATE_DIR . '/inc/taxonomies/author.php';
 require_once TEMPLATE_DIR . '/inc/shortcodes.php';
 require_once TEMPLATE_DIR . '/inc/widgets/latest_books_by_author.php';
 require_once TEMPLATE_DIR . '/inc/utils.php';
+require_once TEMPLATE_DIR . '/inc/customizer.php';
+
+if ( ! function_exists( 'synapse_setup' ) ) {
+	function synapse_setup(): void {
+		/**
+		 * Register custom nav menus
+		 */
+		register_nav_menus(
+			[
+				'primary' => esc_html__( 'Primary menu', 'synapse' ),
+			]
+		);
+	}
+}
+
+add_action( 'after_setup_theme', 'synapse_setup' );
 
 function synapse_scripts(): void {
 	// Enqueue theme stylesheet
