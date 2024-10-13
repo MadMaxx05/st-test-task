@@ -12,6 +12,8 @@ require_once TEMPLATE_DIR . '/inc/shortcodes.php';
 
 require_once TEMPLATE_DIR . '/inc/widgets/latest_books_by_author.php';
 
+require_once TEMPLATE_DIR . '/inc/utils.php';
+
 function synapse_scripts() {
 	// Enqueue theme stylesheet
 	wp_enqueue_style( 'synapse-styles', TEMPLATE_DIR_URI . '/source/css/styles.css' );
