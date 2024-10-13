@@ -59,7 +59,7 @@ add_action( 'init', 'synapse_author_init' );
  *
  * @return array Messages for the `author` taxonomy.
  */
-function author_updated_messages( $messages ) {
+function synapse_author_updated_messages( $messages ) {
 
 	$messages['author'] = [
 		0 => '', // Unused. Messages start at index 1.

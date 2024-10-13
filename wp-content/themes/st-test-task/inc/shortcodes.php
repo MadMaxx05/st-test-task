@@ -16,6 +16,14 @@ function display_books_by_genre_shortcode( $attrs ) {
 		return '<p>Please specify a genre.</p>';
 	}
 
+	$term = get_term_by( 'slug', $attrs['genre'], 'genre' );
+
+	if ( ! $term ) {
+		return '<p>Genre not found.</p>';
+	}
+
+	$genre_name = $term->name;
+
 	$args = [
 		'post_type'      => 'book',
 		'tax_query'      => [
@@ -25,7 +33,7 @@ function display_books_by_genre_shortcode( $attrs ) {
 				'terms'    => $attrs['genre'],
 			],
 		],
-		'posts_per_page' => - 1,
+		'posts_per_page' => 10,
 	];
 
 	$query = new WP_Query( $args );
@@ -34,14 +42,30 @@ function display_books_by_genre_shortcode( $attrs ) {
 		return '<p>No books found for this genre.</p>';
 	}
 
-	$output = '<ul class="books-list">';
+	$output = '<div class="card mb-4">
+                    <div class="card-header">Best Picks from the ' . $genre_name . ' Genre' . '</div>
+                        <div class="card-body">
+                            <ul class="list-unstyled mb-0">';
 
 	while ( $query->have_posts() ) {
 		$query->the_post();
-		$output .= '<li>' . get_the_title() . ' by ' . get_the_author() . '</li>';
+
+		$authors      = get_the_terms( get_the_ID(), 'author' );
+		$author_names = [];
+
+		if ( ! empty( $authors ) ) {
+			foreach ( $authors as $author ) {
+				$author_names[] = $author->name;
+			}
+
+			$author_list = implode( ', ', $author_names );
+			$output      .= '<li><a href="' . get_the_permalink() . '">' . get_the_title() . '</a> by ' . $author_list . '</li>';
+		} else {
+			$output .= '<li><a href="' . get_the_permalink() . '">' . get_the_title() . '</a></li>';
+		}
 	}
 
-	$output .= '</ul>';
+	$output .= '</ul></div></div>';
 
 	wp_reset_postdata();
 
