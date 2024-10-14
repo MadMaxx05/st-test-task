@@ -10,6 +10,7 @@ require_once TEMPLATE_DIR . '/inc/shortcodes.php';
 require_once TEMPLATE_DIR . '/inc/widgets/latest_books_by_author.php';
 require_once TEMPLATE_DIR . '/inc/utils.php';
 require_once TEMPLATE_DIR . '/inc/customizer.php';
+require_once TEMPLATE_DIR . '/inc/admin-ajax.php';
 
 if ( ! function_exists( 'synapse_setup' ) ) {
 	function synapse_setup(): void {
